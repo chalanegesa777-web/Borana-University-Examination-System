@@ -1,0 +1,5 @@
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Copy content from above settings after { } not possible in one file
