@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Exam Attempt</h2>
+    <p>Question: {{ current_question.question.text }}</p>
+    <div class="question-choices">
+        {% for choice in current_question.question.choices.all %}
+            <label><input type="radio" name="choice" value="{{ choice.id }}"> {{ choice.text }}</label><br>
+        {% endfor %}
+    </div>
+    <button id="save-answer">Save Answer</button>
+    <button id="submit-exam" class="danger">Submit</button>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard-grid">
+    <aside class="sidebar">
+        <h3>Navigation</h3>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'course_list' %}">Courses</a>
+        <a href="{% url 'exam_list' %}">Exams</a>
+        <a href="{% url 'question_list' %}">Question Bank</a>
+        <a href="{% url 'reports_index' %}">Reports</a>
+        {% if user.role == 'admin' %}
+            <a href="{% url 'user_list' %}">Users</a>
+            <a href="{% url 'audit_list' %}">Audit Logs</a>
+        {% endif %}
+    </aside>
+    <main class="content-panel">
+        <h1>Dashboard</h1>
+        <div class="stats-grid">
+            {% if user.role == 'admin' %}
+                <div class="stat-card"><span>Total Students</span><strong>{{ stats.students }}</strong></div>
+                <div class="stat-card"><span>Total Instructors</span><strong>{{ stats.instructors }}</strong></div>
+                <div class="stat-card"><span>Total Users</span><strong>{{ stats.users }}</strong></div>
+                <div class="stat-card"><span>Total Courses</span><strong>{{ stats.courses }}</strong></div>
+                <div class="stat-card"><span>Total Exams</span><strong>{{ stats.exams }}</strong></div>
+                <div class="stat-card"><span>Published Exams</span><strong>{{ stats.published_exams }}</strong></div>
+                <div class="stat-card"><span>Upcoming Exams</span><strong>{{ stats.upcoming_exams }}</strong></div>
+                <div class="stat-card"><span>Completed Exams</span><strong>{{ stats.completed_exams }}</strong></div>
+            {% elif user.role == 'instructor' %}
+                <div class="stat-card"><span>My Courses</span><strong>{{ stats.my_courses }}</strong></div>
+                <div class="stat-card"><span>My Exams</span><strong>{{ stats.my_exams }}</strong></div>
+                <div class="stat-card"><span>Upcoming Exams</span><strong>{{ stats.upcoming_exams }}</strong></div>
+                <div class="stat-card"><span>Active Exams</span><strong>{{ stats.active_exams }}</strong></div>
+                <div class="stat-card"><span>Completed Exams</span><strong>{{ stats.completed_exams }}</strong></div>
+                <div class="stat-card"><span>Enrolled Students</span><strong>{{ stats.enrolled_students }}</strong></div>
+                <div class="stat-card"><span>Pending Grading</span><strong>{{ stats.pending_grading }}</strong></div>
+                <div class="stat-card"><span>Average Performance</span><strong>{{ stats.average_exam_performance|floatformat:2 }}</strong></div>
+            {% else %}
+                <div class="stat-card"><span>Available Exams</span><strong>{{ stats.available_exams }}</strong></div>
+                <div class="stat-card"><span>Upcoming Exams</span><strong>{{ stats.upcoming_exams }}</strong></div>
+                <div class="stat-card"><span>Active Exams</span><strong>{{ stats.active_exams }}</strong></div>
+                <div class="stat-card"><span>Completed Exams</span><strong>{{ stats.completed_exams }}</strong></div>
+                <div class="stat-card"><span>Average Score</span><strong>{{ stats.average_score|floatformat:2 }}</strong></div>
+                <div class="stat-card"><span>Recent Results</span><strong>{{ stats.recent_results|length }}</strong></div>
+            {% endif %}
+        </div>
+
+        <section class="panel">
+            <h2>Recent Activities</h2>
+            <ul>
+                {% for activity in stats.recent_activities %}
+                    <li>{{ activity }}</li>
+                {% empty %}
+                    <li>No recent activity.</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+</div>
+{% endblock %}

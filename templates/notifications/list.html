@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Notifications</h2>
+    {% for item in notifications %}
+        <div class="alert {% if item.is_read %}muted{% endif %}">{{ item.title }} - {{ item.message }}</div>
+    {% empty %}
+        <p>No notifications yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

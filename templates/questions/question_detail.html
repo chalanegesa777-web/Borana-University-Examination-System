@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Question Details</h2>
+    <p>{{ question.text }}</p>
+    <p>Category: {{ question.category }}</p>
+    <p>Topic: {{ question.topic }}</p>
+    <p>Difficulty: {{ question.difficulty }}</p>
+    <p>Marks: {{ question.marks }}</p>
+    {% for choice in choices %}
+        <p>{{ choice.text }} {% if choice.is_correct %}(Correct){% endif %}</p>
+    {% empty %}
+        <p>No choices available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

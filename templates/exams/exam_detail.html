@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>{{ exam.title }}</h2>
+    <p>{{ exam.description }}</p>
+    <p>Instructions: {{ exam.instructions }}</p>
+    <p>Start: {{ exam.start_at }}</p>
+    <p>End: {{ exam.end_at }}</p>
+    <p>Duration: {{ exam.duration_minutes }} minutes</p>
+    <a class="button" href="{% url 'start_exam' exam.pk %}">Start Exam</a>
+</div>
+{% endblock %}

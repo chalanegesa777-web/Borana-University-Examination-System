@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Question Bank</h2>
+    <a class="button" href="{% url 'question_create' %}">Create Question</a>
+    <table>
+        <thead><tr><th>Text</th><th>Topic</th><th>Difficulty</th><th>Marks</th><th>Action</th></tr></thead>
+        <tbody>
+            {% for q in page_obj %}
+            <tr>
+                <td>{{ q.text|truncatewords:12 }}</td>
+                <td>{{ q.topic }}</td>
+                <td>{{ q.difficulty }}</td>
+                <td>{{ q.marks }}</td>
+                <td>
+                    <a href="{% url 'question_detail' q.pk %}">View</a>
+                    <a href="{% url 'question_edit' q.pk %}">Edit</a>
+                    <a href="{% url 'question_delete' q.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5">No questions available.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

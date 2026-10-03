@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Create Course</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label>Title</label>
+        <input type="text" name="title" value="{{ title|default:'' }}" class="form-control" required>
+        <label>Code</label>
+        <input type="text" name="code" value="{{ code|default:'' }}" class="form-control" required>
+        <label>Description</label>
+        <textarea name="description" class="form-control">{{ description|default:'' }}</textarea>
+        <button type="submit">Save</button>
+    </form>
+</div>
+{% endblock %}

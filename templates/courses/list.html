@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Courses</h2>
+    <a class="button" href="{% url 'course_create' %}">Create Course</a>
+    <div class="list-grid">
+        {% for course in page_obj %}
+            <div class="list-item">
+                <h3>{{ course.title }}</h3>
+                <p>{{ course.code }}</p>
+                <p>{{ course.description|truncatewords:20 }}</p>
+                <a href="{% url 'course_detail' course.pk %}">Open</a>
+            </div>
+        {% empty %}
+            <p>No courses available.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

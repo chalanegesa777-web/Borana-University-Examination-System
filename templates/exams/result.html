@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Result</h2>
+    <p>Score: {{ attempt.score }}</p>
+    <p>Percentage: {{ attempt.percentage }}%</p>
+    <p>Grade: {{ attempt.grade }}</p>
+    <p>Status: {{ attempt.status }}</p>
+</div>
+{% endblock %}

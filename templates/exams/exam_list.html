@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Exams</h2>
+    <a class="button" href="{% url 'exam_create' %}">Create Exam</a>
+    <table>
+        <thead><tr><th>Title</th><th>Course</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
+            {% for exam in page_obj %}
+            <tr>
+                <td>{{ exam.title }}</td>
+                <td>{{ exam.course.title }}</td>
+                <td>{{ exam.status_label }}</td>
+                <td><a href="{% url 'exam_detail' exam.pk %}">View</a>
+                    {% if user.role == 'student' %}<a href="{% url 'start_exam' exam.pk %}">Start</a>{% endif %}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4">No exams available.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

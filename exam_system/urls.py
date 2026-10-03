@@ -10,7 +10,6 @@ urlpatterns = [
     path('questions/', include('questions.urls')),
     path('exams/', include('exams.urls')),
     path('notifications/', include('notifications.urls')),
-    path('reports/', include('reports.urls')),
     path('audit/', include('audit.urls')),
-    path('dashboard/', include('accounts.urls')),
+    path('reports/', include('reports.urls')),
 ]
